@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -118,15 +119,32 @@ public class MainActivity extends ListActivity {
 
 
     public void inserirEntradaDiccionari() {
-        Uri UriNou;
+        /*Uri UriNou;
+        Long valorId;
         ContentValues Valors = new ContentValues();
         //Creem el valor de la nova entrada
         Valors.put(UserDictionary.Words.APP_ID, "Actividad4Provider");
-        Valors.put(UserDictionary.Words.LOCALE, "es_ES");
+        Valors.put(UserDictionary.Words.LOCALE, "en_US");
         Valors.put(UserDictionary.Words.WORD, "Inca");
         Valors.put(UserDictionary.Words.FREQUENCY, "100");
         //Inserim
-        UriNou = getContentResolver().insert(UserDictionary.Words.CONTENT_URI, Valors);
+        //UriNou = getContentResolver().insert(UserDictionary.Words.CONTENT_URI, Valors);
+        valorId = ContentUris.parseId(getContentResolver().insert(UserDictionary.Words.CONTENT_URI, Valors));
+        //UserDictionary.Words.addWord(getApplicationContext(),"Hola",100,"saludo",Locale.UK);
+        Toast.makeText(getApplicationContext(),valorId + " ",Toast.LENGTH_SHORT).show();*/
+        ContentResolver resolver = getContentResolver();
+        // Put a new word on the dictionary
+        final Locale locale;
+        locale = Locale.getDefault();
+
+        ContentValues values = new ContentValues();
+        values.put(UserDictionary.Words.WORD, "Quasimodo");
+        values.put(UserDictionary.Words.FREQUENCY, 250);
+        values.put(UserDictionary.Words.LOCALE, locale.toString());
+        //Uri result = resolver.insert(UserDictionary.Words.CONTENT_URI,values);
+        UserDictionary.Words.addWord(getApplicationContext(),"Hola",100,"h",locale);
+        //Toast.makeText(getApplicationContext(), +  " ",Toast.LENGTH_SHORT).show();
+
 
 
     }
